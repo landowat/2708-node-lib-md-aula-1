@@ -1,0 +1,1 @@
+# Treinamento Alura - Projeto com o intuito de aprender sobre criação de Libs em NodeJs
