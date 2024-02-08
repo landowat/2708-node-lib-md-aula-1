@@ -7,7 +7,7 @@ function extraiLinks(texto) {
 
     const resultados = compare.map(compare => ({[compare[1]]: [compare[2]]}))
 
-    return resultados;
+    return resultados.length !== 0 ? resultados : 'não há links no arquivo';
 }
 
 function trataErro(erro) {
@@ -43,9 +43,8 @@ async function pegaArquivoAssincV2(caminhoArquivo) {
     try {
         const encoding = 'utf-8';
         const texto = await fs.promises.readFile(caminhoArquivo, encoding);
-        console.log(chalk.yellowBright(typeof texto));
 
-        console.log(extraiLinks(texto));
+        return extraiLinks(texto);
     } catch (erro) {
         trataErro(erro)
     }
@@ -70,7 +69,9 @@ async function pegaArquivoAssincV2(caminhoArquivo) {
 
 // pegaArquivoAssincV2('./arquivos/texto.md');
 
-pegaArquivoAssincV2('./arquivos/texto.md')
-
 // console.log(result)
 // pegaArquivoAssincV2('./arquivos/');
+
+// pegaArquivoAssincV2('./arquivos/texto.md')
+
+export default pegaArquivoAssincV2;
