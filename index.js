@@ -1,6 +1,15 @@
 import fs from 'fs';
 import chalk from 'chalk';
 
+function extraiLinks(texto) {
+    const regex = /\[([^[\]]*?)\]\((https?:\/\/[^\s?#.].[^\s]*)\)/gm;
+    const compare = [...texto.matchAll(regex)];
+
+    const resultados = compare.map(compare => ({[compare[1]]: [compare[2]]}))
+
+    return resultados;
+}
+
 function trataErro(erro) {
     console.log(erro);
 
@@ -34,7 +43,9 @@ async function pegaArquivoAssincV2(caminhoArquivo) {
     try {
         const encoding = 'utf-8';
         const texto = await fs.promises.readFile(caminhoArquivo, encoding);
-        console.log(chalk.yellowBright(texto));
+        console.log(chalk.yellowBright(typeof texto));
+
+        console.log(extraiLinks(texto));
     } catch (erro) {
         trataErro(erro)
     }
@@ -53,11 +64,13 @@ async function pegaArquivoAssincV2(caminhoArquivo) {
 // DISK: ${chalk.yellow('70%')}
 // `);
 
-pegaArquivo('./arquivos/texto.md');
+// pegaArquivo('./arquivos/texto.md');
 
-pegaArquivoAssinc('./arquivos/texto.md');
+// pegaArquivoAssinc('./arquivos/texto.md');
 
-pegaArquivoAssincV2('./arquivos/texto.md');
+// pegaArquivoAssincV2('./arquivos/texto.md');
 
-pegaArquivoAssincV2('./arquivos/texto.md');
-pegaArquivoAssincV2('./arquivos/');
+pegaArquivoAssincV2('./arquivos/texto.md')
+
+// console.log(result)
+// pegaArquivoAssincV2('./arquivos/');
